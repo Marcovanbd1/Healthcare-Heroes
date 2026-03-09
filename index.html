@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare Heroes — March Edition</title>
+  <meta name="description" content="A peer-to-peer health movement in Weymouth & Portland. One email a month. One message worth sharing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --amber: #E8720C;
+      --amber-light: #F59340;
+      --amber-pale: #FEF3E8;
+      --ink: #1A1208;
+      --ink-mid: #4A3728;
+      --warm-white: #FFFBF5;
+      --cream: #FAF3E8;
+      --border: #E8D5BC;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      background: var(--warm-white);
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--ink);
+      color: var(--warm-white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,114,12,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .edition-tag {
+      display: inline-block;
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber-light);
+      border: 1px solid rgba(232,114,12,0.4);
+      padding: 0.35rem 0.9rem;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 span {
+      color: var(--amber);
+    }
+
+    .hero-tagline {
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,251,245,0.75);
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--amber);
+      color: white;
+      font-family: 'Source Serif 4', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      padding: 0.9rem 2rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--amber-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      display: inline-block;
+      color: rgba(255,251,245,0.6);
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.9rem;
+      font-style: italic;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0.9rem 0;
+      transition: color 0.2s;
+    }
+
+    .btn-ghost:hover { color: var(--amber-light); }
+
+    /* COUNTER STRIP */
+    .counter-strip {
+      background: var(--amber);
+      color: white;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      animation: fadeUp 1s ease 0.3s both;
+    }
+
+    .counter-strip p {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+    }
+
+    .counter-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      display: inline;
+    }
+
+    .progress-bar-wrap {
+      max-width: 400px;
+      margin: 0.75rem auto 0;
+      background: rgba(255,255,255,0.3);
+      border-radius: 99px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: white;
+      border-radius: 99px;
+      width: 0%;
+      transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .progress-label {
+      font-size: 0.8rem;
+      opacity: 0.85;
+      margin-top: 0.5rem;
+      display: block;
+    }
+
+    /* SECTIONS */
+    .section {
+      padding: 5rem 2rem;
+    }
+
+    .section-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .section-alt {
+      background: var(--cream);
+    }
+
+    .section-dark {
+      background: var(--ink);
+      color: var(--warm-white);
+    }
+
+    .section-label {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .section-dark .section-label {
+      color: var(--amber-light);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-dark h2 {
+      color: var(--warm-white);
+    }
+
+    p { margin-bottom: 1.25rem; }
+    p:last-child { margin-bottom: 0; }
+
+    .section-dark p {
+      color: rgba(255,251,245,0.8);
+    }
+
+    /* DID YOU KNOW */
+    .dyk-block {
+      border-left: 3px solid var(--amber);
+      padding: 1.25rem 1.5rem;
+      background: var(--amber-pale);
+      border-radius: 0 4px 4px 0;
+      margin: 2rem 0;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--ink-mid);
+    }
+
+    /* TRY SAYING */
+    .try-saying {
+      background: var(--ink);
+      color: var(--warm-white);
+      border-radius: 6px;
+      padding: 2rem;
+      margin: 2rem 0;
+      position: relative;
+    }
+
+    .try-saying-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber-light);
+      display: block;
+      margin-bottom: 0.75rem;
+      font-style: normal;
+    }
+
+    .try-saying p {
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.65;
+      color: rgba(255,251,245,0.9);
+    }
+
+    .copy-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--amber-light);
+      background: none;
+      border: 1px solid rgba(232,114,12,0.4);
+      border-radius: 2px;
+      padding: 0.35rem 0.85rem;
+      cursor: pointer;
+      font-family: 'Source Serif 4', serif;
+      transition: all 0.2s;
+      letter-spacing: 0.05em;
+    }
+
+    .copy-btn:hover {
+      background: rgba(232,114,12,0.15);
+      border-color: var(--amber-light);
+    }
+
+    /* SHARE SECTION */
+    .share-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 3px;
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.15s, opacity 0.2s;
+    }
+
+    .share-btn:hover { transform: translateY(-1px); opacity: 0.9; }
+
+    .share-whatsapp { background: #25D366; color: white; }
+    .share-copy { background: var(--amber-pale); color: var(--amber); border: 1px solid var(--border); }
+    .share-email-btn { background: var(--cream); color: var(--ink-mid); border: 1px solid var(--border); }
+
+    /* JOIN SECTION */
+    .join-section {
+      background: var(--ink);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .join-inner {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .join-section h2 { color: var(--warm-white); }
+
+    .join-section p {
+      color: rgba(255,251,245,0.7);
+      margin-bottom: 2rem;
+    }
+
+    .mailto-btn {
+      display: inline-block;
+      background: var(--amber);
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      padding: 1.1rem 2.5rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      margin-bottom: 1rem;
+    }
+
+    .mailto-btn:hover {
+      background: var(--amber-light);
+      transform: translateY(-2px);
+    }
+
+    .join-small {
+      font-size: 0.82rem;
+      color: rgba(255,251,245,0.4) !important;
+      font-style: italic;
+      margin-top: 1.25rem !important;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255,251,245,0.08);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: rgba(255,251,245,0.3);
+      font-style: italic;
+    }
+
+    /* DIVIDER */
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: var(--amber);
+      margin: 2rem 0;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      .hero { padding: 3rem 1.5rem; min-height: auto; padding-top: 5rem; }
+      .section { padding: 3.5rem 1.5rem; }
+      .join-section { padding: 3.5rem 1.5rem; }
+      .share-actions { flex-direction: column; }
+      .share-btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="edition-tag">March Edition · Weymouth &amp; Portland</span>
+      <h1>Healthcare<br><span>Heroes</span></h1>
+      <p class="hero-tagline">Not all heroes wear capes. Or stethoscopes.</p>
+      <div class="hero-cta-group">
+        <a href="#join" class="btn-primary">🧡 Become a Hero</a>
+        <a href="#mission" class="btn-ghost">See this month's mission →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTER STRIP -->
+  <div class="counter-strip">
+    <p><span class="counter-number">124</span> people across Weymouth &amp; Portland have already pledged to help in small, human ways.</p>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+    <span class="progress-label">Help us reach <strong>200 Heroes by Easter</strong> — 20 April</span>
+  </div>
+
+  <!-- WHAT IS IT -->
+  <section class="section reveal" id="about">
+    <div class="section-inner">
+      <span class="section-label">What is Healthcare Heroes?</span>
+      <h2>One email. One message worth sharing.</h2>
+      <div class="divider"></div>
+      <p>Healthcare Heroes is a peer-to-peer health movement in Weymouth &amp; Portland. Every month, a small group of local people get one simple, human message about health and wellbeing — and share it with the people they care about.</p>
+      <p>No jargon. No appointments. No pressure. Just a small kindness, passed from one person to another.</p>
+      <p>That's it. That's the whole idea.</p>
+
+      <div class="dyk-block">
+        <strong>Did you know?</strong> People are more likely to seek help when someone they trust tells them about it — not when they see a poster or an advert. One conversation from someone who cares is worth more than a hundred leaflets.
+      </div>
+    </div>
+  </section>
+
+  <!-- MARCH MISSION -->
+  <section class="section section-alt reveal" id="mission">
+    <div class="section-inner">
+      <span class="section-label">This Month's Mission</span>
+      <h2>Tell one person about Healthcare Heroes.</h2>
+      <div class="divider"></div>
+      <p>This March, we're not sending health tips. We're asking our Heroes to do something simpler — and more powerful.</p>
+      <p>Think of one person in your life who might benefit from being part of this. A neighbour. A colleague. Someone you've been meaning to check in on. Then tell them about it.</p>
+      <p>You don't need a speech. You just need a sentence.</p>
+
+      <div class="try-saying">
+        <span class="try-saying-label">Try saying</span>
+        <p>"I get a monthly email with simple health tips I can share with people I care about. It's free, it's local, and it takes about a minute. Want me to add you?"</p>
+        <button class="copy-btn" onclick="copySaying(this)">Copy these words</button>
+      </div>
+
+      <p>If they say yes, send them this page. If they want to join, there's a button at the bottom. That's the whole mission.</p>
+    </div>
+  </section>
+
+  <!-- SHARE -->
+  <section class="section section-dark reveal" id="share">
+    <div class="section-inner">
+      <span class="section-label">Pass it on</span>
+      <h2>Share this page with someone you think would care.</h2>
+      <div class="divider"></div>
+      <p>The simplest thing you can do right now. Send this link to one person. That's a Hero move.</p>
+
+      <div class="share-actions">
+        <a href="https://wa.me/?text=I%20thought%20you%20might%20like%20this%20%E2%80%94%20it%27s%20a%20local%20health%20thing%20in%20Weymouth%20%26%20Portland%20worth%20knowing%20about%3A%20https%3A%2F%2Fwww.healthcare-heroes.org"
+           target="_blank" class="share-btn share-whatsapp">
+          💬 Share on WhatsApp
+        </a>
+        <button class="share-btn share-copy" onclick="copyLink(this)">
+          🔗 Copy link
+        </button>
+        <a href="mailto:?subject=Something%20worth%20sharing&body=I%20thought%20you%27d%20like%20this%20%E2%80%94%20a%20local%20health%20movement%20in%20Weymouth%20%26%20Portland%3A%20https%3A%2F%2Fwww.healthcare-heroes.org"
+           class="share-btn share-email-btn">
+          ✉️ Share by email
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section class="join-section reveal" id="join">
+    <div class="join-inner">
+      <span class="section-label" style="display:block; text-align:center;">Join the movement</span>
+      <h2>Become a Healthcare Hero.</h2>
+      <p>One email a month. Easy to read, easy to share. No spam, ever. Just tap the button below and we'll add you.</p>
+      <a href="mailto:healthcare-heroes@dorsetgp.nhs.uk?subject=I%27d%20like%20to%20join%20Healthcare%20Heroes&body=Hi%2C%0A%0APlease%20add%20me%20to%20the%20Healthcare%20Heroes%20monthly%20email.%0A%0AMy%20name%20is%3A%20%0A%0AThanks"
+         class="mailto-btn">
+        🧡 Add me to Healthcare Heroes
+      </a>
+      <p class="join-small">You're in good company. 124 people across Weymouth &amp; Portland have already pledged to help in small, human ways. Help us reach 200 by Easter.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    Healthcare Heroes — supported by Weymouth &amp; Portland PCN &nbsp;·&nbsp;
+    We respect your privacy. You'll only ever receive one email each month. &nbsp;·&nbsp;
+    <a href="mailto:healthcare-heroes@dorsetgp.nhs.uk" style="color:rgba(255,251,245,0.4);">healthcare-heroes@dorsetgp.nhs.uk</a>
+  </footer>
+
+  <script>
+    // Progress bar
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const fill = document.getElementById('progressBar');
+        if (fill) fill.style.width = (124 / 200 * 100) + '%';
+      }, 400);
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => observer.observe(r));
+
+    // Copy link
+    function copyLink(btn) {
+      navigator.clipboard.writeText('https://www.healthcare-heroes.org').then(() => {
+        btn.textContent = '✓ Copied!';
+        setTimeout(() => btn.textContent = '🔗 Copy link', 2000);
+      });
+    }
+
+    // Copy saying
+    function copySaying(btn) {
+      const text = "I get a monthly email with simple health tips I can share with people I care about. It's free, it's local, and it takes about a minute. Want me to add you?";
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '✓ Copied!';
+        setTimeout(() => btn.textContent = 'Copy these words', 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
