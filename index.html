@@ -3,428 +3,562 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Healthcare Heroes — March Edition</title>
+  <title>Healthcare Heroes — Mental Wellbeing Edition</title>
   <meta name="description" content="A peer-to-peer health movement in Weymouth & Portland. One email a month. One message worth sharing.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --amber: #E8720C;
-      --amber-light: #F59340;
-      --amber-pale: #FEF3E8;
-      --ink: #1A1208;
-      --ink-mid: #4A3728;
-      --warm-white: #FFFBF5;
-      --cream: #FAF3E8;
-      --border: #E8D5BC;
+      --navy: #1B2B4B;
+      --blue: #2E6BE6;
+      --blue-mid: #4880F0;
+      --blue-light: #6EA8FE;
+      --blue-pale: #D4E6FF;
+      --blue-frost: #F5F8FF;
+      --ink: #0E1520;
+      --ink-mid: #2A3A54;
+      --white: #FAFCFF;
+      --border: #C8D8F0;
+      --whatsapp: #25D366;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Source Serif 4', Georgia, serif;
-      background: var(--warm-white);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--white);
       color: var(--ink);
-      font-size: 18px;
-      line-height: 1.7;
+      font-size: 17px;
+      line-height: 1.75;
     }
 
     .hero {
-      background: var(--ink);
-      color: var(--warm-white);
       min-height: 100vh;
+      background: var(--ink);
+      position: relative;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 4rem 2rem;
+      justify-content: flex-end;
+      padding: 0 0 5rem;
+    }
+
+    .hero-bg { position: absolute; inset: 0; pointer-events: none; }
+    .hero-bg svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      width: 100%;
+      animation: fadeUp 1s ease both;
+    }
+
+    .edition-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 2.25rem;
+    }
+
+    .edition-tag::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--blue-light);
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(3.2rem, 9vw, 6.5rem);
+      font-weight: 400;
+      line-height: 0.95;
+      margin-bottom: 2rem;
+      color: var(--white);
+    }
+
+    .hero h1 em { font-style: italic; color: var(--blue-light); }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      font-weight: 300;
+      color: rgba(245,248,255,0.6);
+      margin-bottom: 3rem;
+      max-width: 460px;
+      line-height: 1.65;
+    }
+
+    .hero-cta-group { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--blue);
+      color: white;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.85rem 1.85rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover { background: var(--blue-mid); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(46,107,230,0.4); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(245,248,255,0.45);
+      font-size: 0.9rem;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.85rem 0;
+      transition: color 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-ghost:hover { color: var(--blue-light); }
+
+    .ticker {
+      background: var(--navy);
+      color: white;
+      padding: 1.5rem 2rem;
+      animation: fadeUp 1s ease 0.25s both;
+    }
+
+    .ticker-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .ticker-stat { display: flex; align-items: baseline; gap: 0.5rem; }
+
+    .ticker-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.6rem;
+      line-height: 1;
+      color: var(--blue-light);
+    }
+
+    .ticker-label { font-size: 0.88rem; font-weight: 300; color: rgba(245,248,255,0.65); max-width: 220px; }
+    .ticker-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.15); }
+    .progress-wrap { flex: 1; min-width: 200px; }
+
+    .progress-track {
+      background: rgba(255,255,255,0.15);
+      border-radius: 99px;
+      height: 6px;
+      overflow: hidden;
+      margin-bottom: 0.4rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--blue-light);
+      border-radius: 99px;
+      width: 0%;
+      transition: width 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .progress-meta { font-size: 0.75rem; color: rgba(245,248,255,0.5); }
+
+    .section { padding: 5.5rem 2.5rem; }
+    .section-inner { max-width: 640px; margin: 0 auto; }
+    .section-frost { background: var(--blue-frost); }
+    .section-ink { background: var(--ink); color: white; }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1.25rem;
+    }
+
+    .section-ink .label { color: var(--blue-light); }
+
+    .label::before { content: ''; display: block; width: 20px; height: 1px; background: currentColor; }
+
+    h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.9rem, 4vw, 2.75rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 1.75rem;
+      color: var(--ink);
+    }
+
+    .section-ink h2 { color: white; }
+
+    .rule { width: 36px; height: 2px; background: var(--blue); margin-bottom: 2rem; }
+    .section-ink .rule { background: var(--blue-mid); }
+
+    p { margin-bottom: 1.25rem; }
+    p:last-child { margin-bottom: 0; }
+    .section-ink p { color: rgba(245,248,255,0.75); }
+
+    .callout {
+      border-left: 3px solid var(--blue);
+      padding: 1.25rem 1.5rem;
+      background: white;
+      border-radius: 0 8px 8px 0;
+      margin: 2.25rem 0;
+      box-shadow: 0 2px 16px rgba(46,107,230,0.07);
+    }
+
+    .callout strong {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .callout p { font-size: 1rem; color: var(--ink-mid); font-style: italic; margin: 0; line-height: 1.65; }
+
+    .script-card {
+      background: var(--navy);
+      color: white;
+      border-radius: 12px;
+      padding: 2.25rem;
+      margin: 2.25rem 0;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before {
-      content: '';
+    .script-card::before {
+      content: '"';
       position: absolute;
-      top: -20%;
-      right: -10%;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(232,114,12,0.15) 0%, transparent 70%);
+      top: -0.5rem;
+      left: 1.5rem;
+      font-family: 'DM Serif Display', serif;
+      font-size: 8rem;
+      color: var(--blue);
+      opacity: 0.25;
+      line-height: 1;
       pointer-events: none;
     }
 
-    .hero-inner {
-      max-width: 680px;
-      margin: 0 auto;
-      width: 100%;
-      animation: fadeUp 0.9s ease both;
-    }
-
-    .edition-tag {
-      display: inline-block;
-      font-family: 'Source Serif 4', serif;
-      font-size: 0.75rem;
-      font-weight: 300;
+    .script-label {
+      font-size: 0.68rem;
+      font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--amber-light);
-      border: 1px solid rgba(232,114,12,0.4);
-      padding: 0.35rem 0.9rem;
-      border-radius: 2px;
-      margin-bottom: 2rem;
-    }
-
-    .hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(3rem, 8vw, 5.5rem);
-      font-weight: 900;
-      line-height: 1;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
-    }
-
-    .hero h1 span { color: var(--amber); }
-
-    .hero-tagline {
-      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-      font-weight: 300;
-      font-style: italic;
-      color: rgba(255,251,245,0.75);
-      margin-bottom: 2.5rem;
-      max-width: 480px;
-    }
-
-    .hero-cta-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .btn-primary {
-      display: inline-block;
-      background: var(--amber);
-      color: white;
-      font-family: 'Source Serif 4', serif;
-      font-size: 1rem;
-      font-weight: 400;
-      padding: 0.9rem 2rem;
-      border-radius: 3px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-      border: none;
-      cursor: pointer;
-    }
-
-    .btn-primary:hover { background: var(--amber-light); transform: translateY(-1px); }
-
-    .btn-ghost {
-      display: inline-block;
-      color: rgba(255,251,245,0.6);
-      font-family: 'Source Serif 4', serif;
-      font-size: 0.9rem;
-      font-style: italic;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0.9rem 0;
-      transition: color 0.2s;
-    }
-
-    .btn-ghost:hover { color: var(--amber-light); }
-
-    .counter-strip {
-      background: var(--amber);
-      color: white;
-      padding: 1.5rem 2rem;
-      text-align: center;
-      animation: fadeUp 1s ease 0.3s both;
-    }
-
-    .counter-strip p {
-      font-family: 'Source Serif 4', serif;
-      font-size: 1rem;
-      font-weight: 300;
-      letter-spacing: 0.02em;
-    }
-
-    .counter-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 700;
-      display: inline;
-    }
-
-    .progress-bar-wrap {
-      max-width: 400px;
-      margin: 0.75rem auto 0;
-      background: rgba(255,255,255,0.3);
-      border-radius: 99px;
-      height: 8px;
-      overflow: hidden;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      background: white;
-      border-radius: 99px;
-      width: 0%;
-      transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .progress-label {
-      font-size: 0.8rem;
-      opacity: 0.85;
-      margin-top: 0.5rem;
+      color: var(--blue-light);
       display: block;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
     }
 
-    .section { padding: 5rem 2rem; }
-    .section-inner { max-width: 640px; margin: 0 auto; }
-    .section-alt { background: var(--cream); }
-    .section-dark { background: var(--ink); color: var(--warm-white); }
-
-    .section-label {
-      font-family: 'Source Serif 4', serif;
-      font-size: 0.7rem;
-      font-weight: 300;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 1.25rem;
-      display: block;
-    }
-
-    .section-dark .section-label { color: var(--amber-light); }
-
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.01em;
-    }
-
-    .section-dark h2 { color: var(--warm-white); }
-
-    p { margin-bottom: 1.25rem; }
-    p:last-child { margin-bottom: 0; }
-    .section-dark p { color: rgba(255,251,245,0.8); }
-
-    .dyk-block {
-      border-left: 3px solid var(--amber);
-      padding: 1.25rem 1.5rem;
-      background: var(--amber-pale);
-      border-radius: 0 4px 4px 0;
-      margin: 2rem 0;
-      font-style: italic;
-      font-size: 1.05rem;
-      color: var(--ink-mid);
-    }
-
-    .try-saying {
-      background: var(--ink);
-      color: var(--warm-white);
-      border-radius: 6px;
-      padding: 2rem;
-      margin: 2rem 0;
-    }
-
-    .try-saying-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--amber-light);
-      display: block;
-      margin-bottom: 0.75rem;
-      font-style: normal;
-    }
-
-    .try-saying p {
-      font-style: italic;
-      font-size: 1.1rem;
-      line-height: 1.65;
-      color: rgba(255,251,245,0.9);
-    }
+    .script-card p { font-size: 1.1rem; font-weight: 300; line-height: 1.7; color: rgba(245,248,255,0.9); position: relative; z-index: 1; margin-bottom: 1.25rem; }
 
     .copy-btn {
-      display: inline-block;
-      margin-top: 1rem;
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
       font-size: 0.8rem;
-      color: var(--amber-light);
-      background: none;
-      border: 1px solid rgba(232,114,12,0.4);
-      border-radius: 2px;
-      padding: 0.35rem 0.85rem;
+      font-weight: 500;
+      color: var(--blue-light);
+      background: rgba(46,107,230,0.15);
+      border: 1px solid rgba(110,168,254,0.3);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
       cursor: pointer;
-      font-family: 'Source Serif 4', serif;
+      font-family: 'DM Sans', sans-serif;
       transition: all 0.2s;
-      letter-spacing: 0.05em;
     }
 
-    .copy-btn:hover { background: rgba(232,114,12,0.15); border-color: var(--amber-light); }
+    .copy-btn:hover { background: rgba(46,107,230,0.3); }
 
-    .share-actions {
+    .link-card {
       display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 2rem;
+      align-items: center;
+      gap: 1.25rem;
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--ink);
+      margin: 2rem 0;
+      transition: box-shadow 0.2s, transform 0.15s;
+      box-shadow: 0 2px 8px rgba(46,107,230,0.06);
     }
+
+    .link-card:hover { box-shadow: 0 6px 24px rgba(46,107,230,0.14); transform: translateY(-2px); }
+
+    .link-card-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--blue-pale);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .link-card-text { flex: 1; }
+    .link-card-title { font-weight: 500; font-size: 0.95rem; color: var(--blue); margin-bottom: 0.2rem; display: block; }
+    .link-card-url { font-size: 0.8rem; color: rgba(42,58,84,0.5); }
+    .link-card-arrow { color: var(--blue); font-size: 1.2rem; flex-shrink: 0; }
+
+    .share-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin-top: 2rem; }
 
     .share-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      border-radius: 3px;
-      font-family: 'Source Serif 4', serif;
-      font-size: 0.95rem;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.9rem 1.25rem;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 500;
       text-decoration: none;
       cursor: pointer;
       border: none;
-      transition: transform 0.15s, opacity 0.2s;
+      transition: transform 0.15s, box-shadow 0.2s;
     }
 
-    .share-btn:hover { transform: translateY(-1px); opacity: 0.9; }
-    .share-copy { background: var(--amber-pale); color: var(--amber); border: 1px solid var(--border); }
-    .share-email-btn { background: var(--cream); color: var(--ink-mid); border: 1px solid var(--border); }
+    .share-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+    .btn-whatsapp { background: var(--whatsapp); color: white; }
+    .btn-copy-link { background: white; color: var(--ink); border: 1.5px solid var(--border); }
+    .btn-email-share { background: var(--blue-pale); color: var(--blue); border: 1.5px solid var(--border); grid-column: span 2; }
 
     .join-section {
-      background: var(--ink);
-      padding: 5rem 2rem;
+      background: var(--navy);
+      padding: 6rem 2.5rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    .join-inner { max-width: 520px; margin: 0 auto; }
-    .join-section h2 { color: var(--warm-white); }
-    .join-section p { color: rgba(255,251,245,0.7); margin-bottom: 2rem; }
+    .join-section::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(46,107,230,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .join-inner { max-width: 520px; margin: 0 auto; position: relative; z-index: 1; }
+    .join-section .label { color: rgba(245,248,255,0.5); justify-content: center; }
+    .join-section .label::before { display: none; }
+    .join-section h2 { color: white; }
+    .join-section p { color: rgba(245,248,255,0.7); margin-bottom: 2.25rem; }
 
     .mailto-btn {
-      display: inline-block;
-      background: var(--amber);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--blue);
       color: white;
-      font-family: 'Playfair Display', serif;
+      font-family: 'DM Serif Display', serif;
       font-size: 1.2rem;
-      font-weight: 700;
+      font-weight: 400;
       padding: 1.1rem 2.5rem;
-      border-radius: 3px;
+      border-radius: 100px;
       text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
       margin-bottom: 1rem;
     }
 
-    .mailto-btn:hover { background: var(--amber-light); transform: translateY(-2px); }
+    .mailto-btn:hover { background: var(--blue-mid); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(46,107,230,0.4); }
 
-    .join-small {
-      font-size: 0.82rem;
-      color: rgba(255,251,245,0.4) !important;
-      font-style: italic;
-      margin-top: 1.25rem !important;
-    }
+    .join-small { font-size: 0.8rem; color: rgba(245,248,255,0.35) !important; font-style: italic; margin-top: 1.5rem !important; }
 
     footer {
       background: var(--ink);
-      border-top: 1px solid rgba(255,251,245,0.08);
-      padding: 2rem;
+      border-top: 1px solid rgba(245,248,255,0.06);
+      padding: 2rem 2.5rem;
       text-align: center;
-      font-size: 0.8rem;
-      color: rgba(255,251,245,0.3);
+      font-size: 0.78rem;
+      color: rgba(245,248,255,0.25);
       font-style: italic;
     }
 
-    .divider { width: 40px; height: 2px; background: var(--amber); margin: 2rem 0; }
+    footer a { color: rgba(245,248,255,0.25); text-decoration: underline; }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
+      from { opacity: 0; transform: translateY(28px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.75s ease, transform 0.75s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
     @media (max-width: 600px) {
-      .hero { padding: 3rem 1.5rem; min-height: auto; padding-top: 5rem; }
-      .section { padding: 3.5rem 1.5rem; }
-      .join-section { padding: 3.5rem 1.5rem; }
-      .share-actions { flex-direction: column; }
-      .share-btn { justify-content: center; }
+      .hero { padding-bottom: 4rem; }
+      .hero-inner { padding: 0 1.5rem; }
+      .section { padding: 4rem 1.5rem; }
+      .join-section { padding: 4.5rem 1.5rem; }
+      .ticker-inner { flex-direction: column; gap: 1rem; }
+      .ticker-divider { display: none; }
+      .share-grid { grid-template-columns: 1fr; }
+      .btn-email-share { grid-column: span 1; }
     }
   </style>
 </head>
 <body>
 
   <section class="hero">
+    <div class="hero-bg">
+      <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="g1" cx="75%" cy="15%" r="55%">
+            <stop offset="0%" stop-color="#2E6BE6" stop-opacity="0.2"/>
+            <stop offset="100%" stop-color="#0E1520" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="g2" cx="10%" cy="90%" r="40%">
+            <stop offset="0%" stop-color="#1B2B4B" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#0E1520" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="1200" height="700" fill="url(#g1)"/>
+        <rect width="1200" height="700" fill="url(#g2)"/>
+        <g opacity="0.07" stroke="#6EA8FE" stroke-width="1" fill="none">
+          <circle cx="1080" cy="60" r="150"/>
+          <circle cx="1080" cy="60" r="220"/>
+          <circle cx="1080" cy="60" r="300"/>
+          <circle cx="1080" cy="60" r="390"/>
+          <circle cx="1080" cy="60" r="490"/>
+        </g>
+      </svg>
+    </div>
     <div class="hero-inner">
-      <span class="edition-tag">March Edition · Weymouth &amp; Portland</span>
-      <h1>Healthcare<br><span>Heroes</span></h1>
-      <p class="hero-tagline">Not all heroes wear capes. Or stethoscopes.</p>
+      <span class="edition-tag">This Month · Weymouth &amp; Portland</span>
+      <h1>Healthcare<br><em>Heroes</em></h1>
+      <p class="hero-tagline">You're not alone. And neither are the young people you know.</p>
       <div class="hero-cta-group">
-        <a href="#join" class="btn-primary">🧡 Become a Hero</a>
-        <a href="#mission" class="btn-ghost">See this month's mission →</a>
+        <a href="#join" class="btn-primary">💙 Become a Hero</a>
+        <a href="#mission" class="btn-ghost">This month's mission ↓</a>
       </div>
     </div>
   </section>
 
-  <div class="counter-strip">
-    <p><span class="counter-number">124</span> people across Weymouth &amp; Portland have already pledged to help in small, human ways.</p>
-    <div class="progress-bar-wrap">
-      <div class="progress-bar-fill" id="progressBar"></div>
+  <div class="ticker">
+    <div class="ticker-inner">
+      <div class="ticker-stat">
+        <span class="ticker-num">211</span>
+        <span class="ticker-label">people across Weymouth &amp; Portland already pledged</span>
+      </div>
+      <div class="ticker-divider"></div>
+      <div class="progress-wrap">
+        <div class="progress-track">
+          <div class="progress-fill" id="progressBar"></div>
+        </div>
+        <p class="progress-meta">Help us reach <strong>300 Heroes by summer</strong></p>
+      </div>
     </div>
-    <span class="progress-label">Help us reach <strong>200 Heroes by Easter</strong> — 20 April</span>
   </div>
 
   <section class="section reveal" id="about">
     <div class="section-inner">
-      <span class="section-label">What is Healthcare Heroes?</span>
+      <span class="label">What is Healthcare Heroes?</span>
       <h2>One email. One message worth sharing.</h2>
-      <div class="divider"></div>
+      <div class="rule"></div>
       <p>Healthcare Heroes is a peer-to-peer health movement in Weymouth &amp; Portland. Every month, a small group of local people get one simple, human message about health and wellbeing — and share it with the people they care about.</p>
       <p>No jargon. No appointments. No pressure. Just a small kindness, passed from one person to another.</p>
       <p>That's it. That's the whole idea.</p>
-      <div class="dyk-block">
-        <strong>Did you know?</strong> People are more likely to seek help when someone they trust tells them about it — not when they see a poster or an advert. One conversation from someone who cares is worth more than a hundred leaflets.
+      <div class="callout">
+        <strong>Did you know?</strong>
+        <p>People are far more likely to seek support when someone they trust mentions it — not when they see a poster or a leaflet. One conversation from someone who cares is worth more than a hundred campaigns.</p>
       </div>
     </div>
   </section>
 
-  <section class="section section-alt reveal" id="mission">
+  <section class="section section-frost reveal" id="mission">
     <div class="section-inner">
-      <span class="section-label">This Month's Mission</span>
-      <h2>Tell one person about Healthcare Heroes.</h2>
-      <div class="divider"></div>
-      <p>This March, we're not sending health tips. We're asking our Heroes to do something simpler — and more powerful.</p>
-      <p>Think of one person in your life who might benefit from being part of this. A neighbour. A colleague. Someone you've been meaning to check in on. Then tell them about it.</p>
-      <p>You don't need a speech. You just need a sentence.</p>
-      <div class="try-saying">
-        <span class="try-saying-label">Try saying</span>
-        <p>"I get a monthly email with simple health tips I can share with people I care about. It's free, it's local, and it takes about a minute. Want me to add you?"</p>
-        <button class="copy-btn" onclick="copySaying(this)">Copy these words</button>
+      <span class="label">This month we're looking at</span>
+      <h2>Mental health and young people.</h2>
+      <div class="rule"></div>
+      <p>One in six young people in England will experience a mental health problem in any given week. Many of them won't say anything — not because they don't want help, but because they don't know where to start, or they're worried about what people will think.</p>
+      <p>The people best placed to help them aren't always professionals. They're often the people already in their lives — a parent, a grandparent, a neighbour, a friend. Someone who notices. Someone who says something.</p>
+      <p>That someone could be you.</p>
+      <div class="callout">
+        <strong>Signs to watch for</strong>
+        <p>Withdrawing from friends and family. Changes in sleep or appetite. Loss of interest in things they used to enjoy. Difficulty concentrating. Increased irritability or low mood. Talking about feeling hopeless. Trust your instincts — if something feels different, it probably is.</p>
       </div>
-      <p>If they say yes, send them this page. If they want to join, there's a button at the bottom. That's the whole mission.</p>
+      <p>You don't need to have the answers. You just need to be willing to have the conversation. A simple "I've noticed you seem a bit down lately — are you okay?" can open a door that changes everything.</p>
     </div>
   </section>
 
-  <section class="section section-dark reveal" id="share">
+  <section class="section reveal" id="mission-action">
     <div class="section-inner">
-      <span class="section-label">Pass it on</span>
-      <h2>Share this page with someone you think would care.</h2>
-      <div class="divider"></div>
-      <p>The simplest thing you can do right now. Send this link to one person. That's a Hero move.</p>
-      <div class="share-actions">
-        <button class="share-btn share-copy" onclick="copyLink(this)">
-          🔗 Copy link
-        </button>
-        <a href="mailto:?subject=Something%20worth%20sharing&body=I%20thought%20you%27d%20like%20this%20%E2%80%94%20a%20local%20health%20movement%20in%20Weymouth%20%26%20Portland%3A%20https%3A%2F%2Fwww.healthcare-heroes.org" class="share-btn share-email-btn">
+      <span class="label">This month's mission</span>
+      <h2>Share one page with one person.</h2>
+      <div class="rule"></div>
+      <p>Our PCN has a mental wellbeing page built for exactly this moment. It has local resources, guidance for parents and young people, and a starting point for getting support. It's free, it's local, and it's there when people need it.</p>
+      <p>Your mission this month: share it with one person who might need it — or who knows someone who might.</p>
+
+      <a href="https://weymouthandportlandpcn.co.uk/mentalhealthandwellbeing" target="_blank" rel="noopener" class="link-card">
+        <div class="link-card-icon">🧠</div>
+        <div class="link-card-text">
+          <span class="link-card-title">Mental Health &amp; Wellbeing</span>
+          <span class="link-card-url">weymouthandportlandpcn.co.uk</span>
+        </div>
+        <span class="link-card-arrow">→</span>
+      </a>
+
+      <p>Think of one person right now. A parent who's been worried. A young person you know. A colleague who mentioned something in passing. Send them the link. That's the whole mission.</p>
+
+      <div class="script-card">
+        <span class="script-label">Try saying this</span>
+        <p>"I thought of you when I read this. Our local NHS has a mental health page for young people — and it's actually really useful. Might be worth a look."</p>
+        <button class="copy-btn" onclick="copySaying(this)">📋 Copy these words</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-ink reveal" id="share">
+    <div class="section-inner">
+      <span class="label">Pass it on</span>
+      <h2>Share this page with someone who'd care.</h2>
+      <div class="rule"></div>
+      <p>The simplest Hero move you can make right now. Send this page to one person. WhatsApp it. Email it. Drop it in a group chat. You never know whose day — or week — that might change.</p>
+      <div class="share-grid">
+        <a href="https://wa.me/?text=I%20thought%20this%20might%20be%20useful%20%E2%80%94%20a%20local%20health%20movement%20in%20Weymouth%20%26%20Portland%20about%20supporting%20young%20people%27s%20mental%20health%3A%20https%3A%2F%2Fwww.healthcare-heroes.org" target="_blank" rel="noopener" class="share-btn btn-whatsapp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <button class="share-btn btn-copy-link" onclick="copyLink(this)">🔗 Copy link</button>
+        <a href="mailto:?subject=Something%20worth%20sharing&body=I%20thought%20you%27d%20find%20this%20useful%20%E2%80%94%20a%20local%20health%20movement%20in%20Weymouth%20%26%20Portland%20focused%20on%20young%20people%27s%20mental%20health%3A%20https%3A%2F%2Fwww.healthcare-heroes.org" class="share-btn btn-email-share">
           ✉️ Share by email
         </a>
       </div>
@@ -433,53 +567,50 @@
 
   <section class="join-section reveal" id="join">
     <div class="join-inner">
-      <span class="section-label" style="display:block; text-align:center;">Join the movement</span>
+      <span class="label">Join the movement</span>
       <h2>Become a Healthcare Hero.</h2>
-      <p>One email a month. Easy to read, easy to share. No spam, ever. Just tap the button below and we'll add you.</p>
+      <p>One email a month. Easy to read, easy to share. No spam, ever. Just tap the button below and we'll add you to the list.</p>
       <a href="mailto:healthcare-heroes@dorsetgp.nhs.uk?subject=I%27d%20like%20to%20join%20Healthcare%20Heroes&body=Hi%2C%0A%0APlease%20add%20me%20to%20the%20Healthcare%20Heroes%20monthly%20email.%0A%0AMy%20name%20is%3A%20%0A%0AThanks" class="mailto-btn">
-        🧡 Add me to Healthcare Heroes
+        💙 Add me to Healthcare Heroes
       </a>
-      <p class="join-small">You're in good company. 124 people across Weymouth &amp; Portland have already pledged to help in small, human ways. Help us reach 200 by Easter.</p>
+      <p class="join-small">You're in good company. 211 people across Weymouth &amp; Portland have already pledged to help in small, human ways.</p>
     </div>
   </section>
 
   <footer>
     Healthcare Heroes — supported by Weymouth &amp; Portland PCN &nbsp;·&nbsp;
     We respect your privacy. You'll only ever receive one email each month. &nbsp;·&nbsp;
-    <a href="mailto:healthcare-heroes@dorsetgp.nhs.uk" style="color:rgba(255,251,245,0.4);">healthcare-heroes@dorsetgp.nhs.uk</a>
+    <a href="mailto:healthcare-heroes@dorsetgp.nhs.uk">healthcare-heroes@dorsetgp.nhs.uk</a>
   </footer>
 
   <script>
     window.addEventListener('load', () => {
       setTimeout(() => {
         const fill = document.getElementById('progressBar');
-        if (fill) fill.style.width = (124 / 200 * 100) + '%';
+        if (fill) fill.style.width = (211 / 300 * 100) + '%';
       }, 400);
     });
 
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
     reveals.forEach(r => observer.observe(r));
 
     function copyLink(btn) {
       navigator.clipboard.writeText('https://www.healthcare-heroes.org').then(() => {
         btn.textContent = '✓ Copied!';
-        setTimeout(() => btn.textContent = '🔗 Copy link', 2000);
+        setTimeout(() => btn.innerHTML = '🔗 Copy link', 2000);
       });
     }
 
     function copySaying(btn) {
-      const text = "I get a monthly email with simple health tips I can share with people I care about. It's free, it's local, and it takes about a minute. Want me to add you?";
+      const text = "I thought of you when I read this. Our local NHS has a mental health page for young people — and it's actually really useful. Might be worth a look.";
       navigator.clipboard.writeText(text).then(() => {
         btn.textContent = '✓ Copied!';
-        setTimeout(() => btn.textContent = 'Copy these words', 2000);
+        setTimeout(() => btn.innerHTML = '📋 Copy these words', 2000);
       });
     }
   </script>
